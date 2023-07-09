@@ -1,12 +1,12 @@
-import { ThemeProvider } from "styled-components";
-import { theme } from "style/theme/theme";
-import GlobalStyle from "style/GlobalStyle";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "component/Header/Header";
-import Nav from "component/Nav/Nav";
-import Main from "component/Main/Main";
+import { ThemeProvider } from "styled-components";
+import { theme } from "styles/theme/theme";
+import GlobalStyle from "styles/GlobalStyle";
+import Header from "components/Header/Header";
+import Nav from "components/Nav/Nav";
 import Detail from "pages/Detail";
 import Profile from "pages/Profile";
+import Main from "pages/Main";
 
 const Router = () => {
   return (
