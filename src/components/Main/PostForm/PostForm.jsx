@@ -5,13 +5,11 @@ import { useMutation, useQueryClient } from "react-query";
 import { addPost } from "api/posts";
 import { buttonValidate, validate } from "modules/formValidate";
 
-const initialState = {
-  title: "",
-  content: ""
-};
-
 const PostForm = () => {
+  const initialState = { title: "", content: "" };
+
   const queryClient = useQueryClient();
+  // post
   const mutation = useMutation(addPost, {
     onSuccess: () => queryClient.invalidateQueries("posts")
   });

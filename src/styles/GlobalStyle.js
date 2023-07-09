@@ -14,6 +14,14 @@ const GlobalStyle = styled.createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+  ::selection {
+    background-color: black;
+    color: red;
+  }
+  ::-moz-selection {
+    background-color: black;
+    color: red;
+  }
 
   html,
   body,
