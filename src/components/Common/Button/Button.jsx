@@ -1,9 +1,8 @@
 import * as Styled from "components/Common/Button/Button.style";
 
-const Button = ({ children, ...props }) => {
-  return <Styled.Button {...props}>{children}</Styled.Button>;
+const Button = ({ children, post, ...rest }) => {
+  return <Styled.Button {...rest}>{children}</Styled.Button>;
 };
-
 export default Button;
 
 /*

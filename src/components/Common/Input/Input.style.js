@@ -33,6 +33,7 @@ export const Input = styled.input`
     background-color: ${theme.colors[color] || theme.colors.white};
 
     font-size: ${sizes[size]?.fontSize};
+
     &:focus {
       filter: invert(1);
     }
