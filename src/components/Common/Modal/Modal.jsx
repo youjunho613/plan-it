@@ -1,12 +1,15 @@
 import * as Styled from "components/Common/Modal/Modal.style";
-import Button from "components/Common/Button/Button";
+import { createPortal } from "react-dom";
+import { useDispatch } from "react-redux";
 
-const Modal = Children => {
-  return (
-    <Styled.Outer>
-      <Styled.Inner>{Children}</Styled.Inner>
-      <Button></Button>
-    </Styled.Outer>
+const Modal = ({ children, target }) => {
+  const dispatch = useDispatch();
+  const closeModal = event => event.target === event.currentTarget && dispatch((target = false));
+  return createPortal(
+    <Styled.Outer onClick={closeModal}>
+      <Styled.Inner>{children}</Styled.Inner>
+    </Styled.Outer>,
+    document.getElementById("modal-root")
   );
 };
 
@@ -30,17 +33,17 @@ export default Modal;
 //   }
 
 //   return (
-//     <div className="modal">
-//       <div className="modal-content">
-//         <div className="modal-header">
+//     <div >
+//       <div >
+//         <div >
 //           <h2>Modal Title</h2>
-//           <button className="close-button" onClick={handleClose}>
+//           <button onClick={handleClose}>
 //             X
 //           </button>
 //         </div>
-//         <div className="modal-body">{children}</div>
+//         <div>{children}</div>
 //       </div>
-//       <div className="overlay" />
+//       <div/>
 //     </div>
 //   );
 // }
