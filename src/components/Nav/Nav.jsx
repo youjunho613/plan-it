@@ -1,3 +1,4 @@
+import Text from "components/Common/Text/Text";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
@@ -5,7 +6,11 @@ const Nav = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            <Text as={"h1"} size={"xLarge"} color={"cabana"}>
+              Plan-It
+            </Text>
+          </Link>
         </li>
       </ul>
     </nav>

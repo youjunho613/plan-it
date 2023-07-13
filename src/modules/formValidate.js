@@ -4,6 +4,7 @@ const validate = values => {
   return errors;
 };
 
-const buttonValidate = values => !values.title || !values.content;
+const buttonValidate = values =>
+  (!values.title || !values.content) && (!values.id || !values.password);
 
 export { validate, buttonValidate };

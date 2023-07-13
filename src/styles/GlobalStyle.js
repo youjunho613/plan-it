@@ -8,19 +8,18 @@ const GlobalStyle = styled.createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "Roboto", normal, "Gowun Dodum", normal, sans-serif;
+    -webkit-tap-highlight-color: transparent;
   }
 
   a {
     text-decoration: none;
     color: inherit;
   }
+
+  input::selection,
   ::selection {
-    background-color: black;
-    color: red;
-  }
-  ::-moz-selection {
-    background-color: black;
-    color: red;
+    background-color: #cc8a56;
+    color: #e5d9b6;
   }
 
   html,
@@ -53,7 +52,7 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     line-height: 1;
-    background-color: #f6f9f0;
+    background-color: #ffffff;
     margin-bottom: 100px;
   }
 

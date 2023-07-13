@@ -31,7 +31,7 @@ const Div = styled.div`
 //   };
 
 //   return (
-//     <div className="app">
+//     <div>
 //       <h1>My App</h1>
 //       <button onClick={handleOpenModal}>Open Modal</button>
 //       <Modal isOpen={isOpen} onClose={handleCloseModal}>

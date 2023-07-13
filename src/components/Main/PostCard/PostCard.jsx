@@ -1,9 +1,10 @@
 import { deletePost, patchPost } from "api/posts";
 import Button from "components/Common/Button/Button";
 import Input from "components/Common/Input/Input";
+import Text from "components/Common/Text/Text";
 import useForm from "components/Hooks/useForm";
 import { buttonValidate, validate } from "modules/formValidate";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 const PostCard = ({ item }) => {
@@ -15,7 +16,7 @@ const PostCard = ({ item }) => {
       ? setIsOpen({ ...isOpen, deleteOpen: boolean })
       : setIsOpen({ ...isOpen, patchOpen: boolean });
 
-  const initialState = { title: title, content: content };
+  const initialState = { title, content };
 
   const queryClient = useQueryClient();
   // delete
@@ -28,11 +29,9 @@ const PostCard = ({ item }) => {
   const patchMutation = useMutation(patchPost, {
     onSuccess: () => queryClient.invalidateQueries("posts")
   });
-  const submitAction = () => patchMutation.mutate(valuesId);
-  const [valuesId, setValuesId] = useState();
+  const submitAction = () => patchMutation.mutate({ values, id });
 
   const { values, errors, onChange, onSubmit } = useForm(initialState, validate, submitAction);
-  useEffect(() => setValuesId({ values, id }), [values, id]);
 
   const inputAttribute = (name, placeholder) => ({
     type: "text",
@@ -44,13 +43,18 @@ const PostCard = ({ item }) => {
 
   return (
     <li>
-      <span>{id}</span>
+      <Text size={"small"}>ID : {id}</Text>
+      <Text size={"large"}>{title}</Text>
+      <Text size={"medium"}>{content}</Text>
+
       {!isOpen.deleteOpen && !isOpen.patchOpen && (
         <>
-          <p>{title}</p>
-          <p>{content}</p>
-          <Button onClick={() => changeBoolean("patch", true)}>수정</Button>
-          <Button onClick={() => changeBoolean("delete", true)}>삭제</Button>
+          <Button size={"large"} bgcolor={"tropics"} onClick={() => changeBoolean("patch", true)}>
+            수정
+          </Button>
+          <Button size={"large"} bgcolor={"tropics"} onClick={() => changeBoolean("delete", true)}>
+            삭제
+          </Button>
         </>
       )}
 
@@ -60,8 +64,15 @@ const PostCard = ({ item }) => {
           {errors.title && <span>{errors.title}</span>}
           <Input {...inputAttribute("content", "내용")} />
           {errors.content && <span>{errors.content}</span>}
-          <Button disabled={buttonValidate(values)}>수정 완료</Button>
-          <Button type="button" onClick={() => changeBoolean("patch", false)}>
+          <Button size={"large"} bgcolor={"tropics"} disabled={buttonValidate(values)}>
+            수정 완료
+          </Button>
+          <Button
+            size={"large"}
+            bgcolor={"tropics"}
+            type="button"
+            onClick={() => changeBoolean("patch", false)}
+          >
             닫기
           </Button>
         </form>
@@ -69,8 +80,12 @@ const PostCard = ({ item }) => {
 
       {isOpen.deleteOpen && (
         <>
-          <Button onClick={deleteHandler}>삭제 확인</Button>
-          <Button onClick={() => changeBoolean("delete", false)}>닫기</Button>
+          <Button size={"large"} bgcolor={"tropics"} onClick={deleteHandler}>
+            삭제하기
+          </Button>
+          <Button size={"large"} bgcolor={"tropics"} onClick={() => changeBoolean("delete", false)}>
+            닫기
+          </Button>
         </>
       )}
     </li>

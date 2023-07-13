@@ -1,14 +1,9 @@
 {
   "posts": [
     {
-      "title": "1",
-      "content": "1123123123123",
+      "title": "123",
+      "content": "00000000000",
       "id": 1
-    },
-    {
-      "title": "test",
-      "content": "testtesttesttest",
-      "id": 2
     }
   ]
 }
