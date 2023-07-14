@@ -9,10 +9,14 @@ const FONT_SIZE = {
 
 export const Text = styled.p`
   ${props => css`
+    margin: 2px 0;
+
     font-size: ${FONT_SIZE[props.size]};
     font-weight: ${props.fontWeight};
     letter-spacing: ${props.letterSpacing};
-
+    line-height: 1.2;
+    white-space: pre-wrap;
+    text-align: ${props.$textalign};
     color: ${props.theme.colors[props.color]};
   `}
 `;

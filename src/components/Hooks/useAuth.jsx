@@ -3,8 +3,19 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
+  let tokenTime = 600;
+
+  const createUsers = async user => {
+    try {
+      await axios.post(`${process.env.REACT_APP_SERVER_USER_URL}/register`, user);
+      navigate("/login");
+      alert("회원가입 성공");
+    } catch (error) {
+      return alert(error.response.data.message);
+    }
+  };
 
   const getUser = async () => {
     try {
@@ -13,55 +24,29 @@ const useAuth = () => {
       });
       return response;
     } catch (error) {
-      console.log(`토큰 가져오기 에러 :`, error);
-      console.log(`토큰 가져오기 에러 :`, error.response.data.message);
       return alert(error.response.data.message);
     }
   };
 
-  let tokenTime = 600;
   const login = async user => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_USER_URL}/login`, user);
       setCookie("userToken", data.token, { path: "/", maxAge: tokenTime });
-      nav("/");
-      console.log("로그인 작동");
+      navigate("/");
       setTimeout(() => {
-        if (!cookies.userToken) {
-          logout();
-        }
+        if (!cookies.userToken) alert(`로그인이 만료되었습니다. 재로그인 해주세요`);
       }, tokenTime * 1000);
-      setTimeout(() => {
-        alert(`로그인 시간이 ${tokenTime / 2}초 남았습니다.`);
-      }, (tokenTime * 1000) / 2);
     } catch (error) {
-      console.log(`로그인  에러 :`, error);
+      return alert(error.response.data.message);
     }
   };
 
   const logout = () => {
     try {
       removeCookie("userToken");
-      nav("/login");
+      navigate("/login");
     } catch (error) {
-      console.log(`로그아웃 에러 : `, error);
-    }
-  };
-
-  /**
-   * axios post
-   * @param {*} user request {id,password}
-   */
-  const createUsers = async user => {
-    try {
-      await axios
-        .post(`${process.env.REACT_APP_SERVER_USER_URL}/register`, user)
-        .then(function (response) {
-          console.log(response);
-        });
-      nav("/login");
-    } catch (error) {
-      console.log(`회원가입 에러 :`, error);
+      return alert(error.response.data.message);
     }
   };
 

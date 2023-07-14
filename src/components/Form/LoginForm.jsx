@@ -1,16 +1,12 @@
-// feat
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { buttonValidate } from "modules/formValidate";
-// hook
-import useForm from "components/Hooks/useForm";
-import useAuth from "components/Hooks/useAuth";
-// import usePrintError from "components/Hooks/usePrintError";
-// component
+import useForm from "components/hooks/useForm";
+import useAuth from "components/hooks/useAuth";
 import Input from "components/Common/Input/Input";
 import Button from "components/Common/Button/Button";
-// style
 import { FormColumnBox } from "./Form.style";
+import Text from "components/Common/Text/Text";
 
 const initialState = { id: "", password: "" };
 
@@ -22,7 +18,6 @@ const validateForm = values => {
 };
 
 const LoginForm = () => {
-  // const { errorMessage, printError } = usePrintError();
   const navigate = useNavigate();
   const { login } = useAuth();
   const queryClient = useQueryClient();
@@ -32,29 +27,36 @@ const LoginForm = () => {
 
   const submitAction = () => {
     mutation.mutate(values);
-    console.log("Todo 쿠키 설정");
   };
 
-  const { values, errors, onChange, onSubmit } = useForm(initialState, validateForm, submitAction);
-
-  const inputAttribute = (name, placeholder) => ({
-    type: name,
-    name,
-    value: values[name],
-    placeholder,
-    onChange
-  });
+  const { values, errors, onSubmit, inputAttribute } = useForm(
+    initialState,
+    validateForm,
+    submitAction
+  );
 
   return (
-    <FormColumnBox padding={"40px"} bgcolor={"sand"} onSubmit={onSubmit}>
-      <Input size={"large"} {...inputAttribute("id", "아이디")} />
-      {errors.id && <span>{errors.id}</span>}
-      {/* {errorMessage && <span>{errorMessage}</span>} */}
-      <Input size={"large"} {...inputAttribute("password", "비밀번호")} />
-      {errors.password && <span>{errors.password}</span>}
+    <FormColumnBox padding={"40px"} $bgcolor={"sand"} onSubmit={onSubmit}>
+      <Input size={"large"} {...inputAttribute("id")} type={"id"} placeholder={"아이디"} />
+      {errors.id && (
+        <Text as={"span"} size={"medium"} color={"white"} fontWeight={700} letterSpacing={"1.2px"}>
+          {errors.id}
+        </Text>
+      )}
+      <Input
+        size={"large"}
+        {...inputAttribute("password")}
+        type={"password"}
+        placeholder={"비밀번호"}
+      />
+      {errors.password && (
+        <Text as={"span"} size={"medium"} color={"white"} fontWeight={700} letterSpacing={"1.2px"}>
+          {errors.password}
+        </Text>
+      )}
       <Button
         size={"large"}
-        bgcolor={"cabana"}
+        $bgcolor={"cabana"}
         fontWeight={"700"}
         disabled={buttonValidate(values)}
       >
@@ -62,7 +64,7 @@ const LoginForm = () => {
       </Button>
       <Button
         size={"large"}
-        bgcolor={"cabana"}
+        $bgcolor={"cabana"}
         fontWeight={"700"}
         type={"button"}
         onClick={() => navigate("/createaccount")}

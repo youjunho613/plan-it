@@ -52,7 +52,8 @@ const GlobalStyle = styled.createGlobalStyle`
 
   body {
     line-height: 1;
-    background-color: #ffffff;
+    background: linear-gradient(to top, #cc8a56, #e5d9b6 30%, #14b09b 50%, #0359ae 85%);
+    background-attachment: fixed;
     margin-bottom: 100px;
   }
 

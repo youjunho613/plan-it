@@ -15,7 +15,3 @@ export const HeaderBox = styled.header`
   background-color: ${props => props.theme.main.endeavor};
   color: ${props => props.theme.main.textWhite};
 `;
-
-export const ButtonBox = styled.div`
-  /* gap: 20px; */
-`;

@@ -1,38 +1,42 @@
 import Button from "components/Common/Button/Button";
-import useAuth from "components/Hooks/useAuth";
+import useAuth from "components/hooks/useAuth";
 import Nav from "components/Nav/Nav";
 import { useMutation } from "react-query";
-import { ButtonBox, HeaderBox } from "./Header.style";
+import { HeaderBox } from "./Header.style";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "redux/modules/modalSlice";
 import Modal from "components/Common/Modal/Modal";
+import PostForm from "components/Form/PostForm";
 
-// @Todo 로그아웃
-// @Todo 글작성 모달
 const Header = () => {
   const { logout } = useAuth();
   const mutation = useMutation(logout);
 
   const isOpen = useSelector(state => state.modal);
-  console.log("redux", isOpen);
 
   const dispatch = useDispatch();
 
   const modalOpenHandler = () => {
     dispatch(openModal("postCreate"));
   };
+
+  // TODO 버튼&h1 구름 백그라운드 추가
   return (
     <HeaderBox>
       <Nav />
-      <ButtonBox>
-        <Button size={"large"} bgcolor={"sand"} fontWeight={600} onClick={modalOpenHandler}>
+      <div>
+        <Button size={"large"} $bgcolor={"sand"} fontWeight={600} onClick={modalOpenHandler}>
           새 글
         </Button>
-        {isOpen.postCreate && <Modal></Modal>}
-        <Button size={"large"} bgcolor={"sand"} fontWeight={600} onClick={() => mutation.mutate()}>
+        {isOpen.postCreate && (
+          <Modal closeTarget={"postCreate"}>
+            <PostForm />
+          </Modal>
+        )}
+        <Button size={"large"} $bgcolor={"sand"} fontWeight={600} onClick={() => mutation.mutate()}>
           로그아웃
         </Button>
-      </ButtonBox>
+      </div>
     </HeaderBox>
   );
 };

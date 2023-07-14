@@ -8,7 +8,7 @@ export const FormColumnBox = styled.form`
     gap: 25px;
 
     padding: ${props.padding};
-    background-color: ${props.theme.colors[props.bgcolor]};
+    background-color: ${props.theme.colors[props.$bgcolor]};
     border-radius: 40px;
   `}
 `;

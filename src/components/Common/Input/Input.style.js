@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const sizes = {
+const SIZES = {
   small: {
     width: "200px",
     height: "30px",
@@ -18,24 +18,40 @@ const sizes = {
     height: "60px",
     fontSize: "50px",
     borderRadius: "20px"
+  },
+  patch: {
+    width: "100%",
+    fontSize: "1.2rem",
+    borderRadius: "20px"
+  },
+  post: {
+    width: "800px",
+    fontSize: "2rem",
+    borderRadius: "20px"
   }
 };
 export const Input = styled.input`
   ${({ color, theme, size }) => css`
-    width: ${sizes[size]?.width};
-    height: ${sizes[size]?.height};
+    width: ${SIZES[size]?.width};
+    height: ${SIZES[size]?.height};
 
+    margin: 5px;
     padding: 5px;
 
     border: none;
     outline: none;
-    border-radius: ${sizes[size]?.borderRadius};
-    background-color: ${theme.colors[color] || theme.colors.white};
+    border-radius: ${SIZES[size]?.borderRadius};
+    background-color: ${theme.colors[color]};
 
-    font-size: ${sizes[size]?.fontSize};
+    font-size: ${SIZES[size]?.fontSize};
 
     &:focus {
       filter: invert(1);
     }
   `};
+`;
+
+export const Textarea = styled(Input)`
+  height: 300px;
+  resize: none;
 `;

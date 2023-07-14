@@ -22,7 +22,13 @@ const useForm = (initialState, validate, submitAction) => {
     [initialState, submitAction, validate, values]
   );
 
-  return { values, errors, onChange, onSubmit };
+  const inputAttribute = name => ({
+    name,
+    value: values[name],
+    onChange
+  });
+
+  return { values, errors, onSubmit, inputAttribute };
 };
 
 export default useForm;

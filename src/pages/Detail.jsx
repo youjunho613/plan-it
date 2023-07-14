@@ -1,9 +1,6 @@
-const Detail = () => {
-  return (
-    <div>
-      <h2>Detail</h2>
-    </div>
-  );
-};
+import TodoDetail from "components/features/crud/TodoDetail";
 
+const Detail = () => {
+  return <TodoDetail />;
+};
 export default Detail;

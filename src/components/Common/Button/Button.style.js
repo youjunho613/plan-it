@@ -1,37 +1,42 @@
 import styled, { css } from "styled-components";
 
-const HEIGHT = {
-  large: "3rem",
-  medium: "2rem",
-  small: "1rem"
-};
-
-const BORDER_RADIUS = {
-  large: "1rem",
-  medium: "0.9rem",
-  small: "0.8rem"
-};
-
-const FONT_SIZE = {
-  large: "1.25rem",
-  medium: "1rem",
-  small: "0.85rem"
+const SIZES = {
+  small: {
+    height: "1rem",
+    fontSize: "0.85rem",
+    borderRadius: "0.8rem"
+  },
+  medium: {
+    height: "2rem",
+    fontSize: "1rem",
+    borderRadius: "0.9rem"
+  },
+  large: {
+    height: "3rem",
+    fontSize: "1.25rem",
+    borderRadius: "1rem"
+  }
 };
 
 export const Button = styled.button`
   ${props => css`
-    height: ${HEIGHT[props.size]};
+    height: ${SIZES[props.size]?.height};
 
     margin: 5px;
     padding: 5px;
 
-    background-color: ${props.theme.colors[props.bgcolor]};
-    border-radius: ${BORDER_RADIUS[props.size]};
+    background-color: ${props.theme.colors[props.$bgcolor]};
+    border-radius: ${SIZES[props.size]?.borderRadius};
     box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
 
-    font-size: ${FONT_SIZE[props.size]};
+    color: ${props.theme.colors[props.color]};
+    font-size: ${SIZES[props.size]?.fontSize};
     font-weight: ${props.fontWeight};
     letter-spacing: 1.2px;
+
+    &:hover {
+      opacity: 0.9;
+    }
 
     &:active {
       box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
