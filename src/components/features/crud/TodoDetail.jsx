@@ -13,7 +13,7 @@ import { getPosts } from "api/posts";
 const TodoDetail = () => {
   const param = useParams();
   const { isLoading, isError, data } = useQuery("posts", getPosts);
-  const item = data?.find(todo => String(todo.id) === param.contentId);
+  const item = data.find(item => String(item.id) === param.contentId);
 
   const { id, title, content } = item;
   const [isOpen, setIsOpen] = useState({ deleteOpen: false, patchOpen: false });

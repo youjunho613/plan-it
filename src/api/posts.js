@@ -3,7 +3,7 @@ import axios from "axios";
 const posts = "/posts";
 
 // FIXME 무한스크롤
-// const PAGE_SIZE = 10;
+// const PAGE_SIZE = 15;
 // const getPosts = async (page = 0) => {
 //   try {
 //     const response = await axios.get(

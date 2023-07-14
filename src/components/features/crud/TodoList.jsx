@@ -29,8 +29,8 @@ export default TodoList;
 // import IsError from "components/lenderStatus/IsError";
 // import { getPosts } from "api/posts";
 
-// const PAGE_SIZE = 1;
-// const LOAD_THRESHOLD = 100;
+// const PAGE_SIZE = 15; // 한 번에 로드할 페이지 크기
+// const LOAD_THRESHOLD = 200; // 스크롤 이벤트 발생 임계값 (px)
 
 // const TodoList = () => {
 //   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery(
